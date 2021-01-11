@@ -1,20 +1,30 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title> Chat with Yoda </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title size="large">Chat with Yoda</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-list>
+    <ion-item
+      [ngClass]="{yoda: msg.author === 'yoda'}"
+      *ngFor="let msg of messages"
+      >{{msg.message}}</ion-item
+    >
+  </ion-list>
 </ion-content>
+
+<ion-footer #messageFooter>
+  <ion-toolbar>
+    <ion-item>
+      <ion-input #messageInput [(ngModel)]="message"></ion-input>
+      <ion-button (click)="sendMessage($event)">Send</ion-button>
+    </ion-item>
+  </ion-toolbar>
+</ion-footer>
