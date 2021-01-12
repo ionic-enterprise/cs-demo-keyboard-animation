@@ -23,7 +23,12 @@
 <ion-footer #messageFooter>
   <ion-toolbar>
     <ion-item>
-      <ion-input #messageInput [(ngModel)]="message"></ion-input>
+      <ion-input
+        #messageInput
+        autocapitalize="on"
+        inputmode="text"
+        [(ngModel)]="message"
+      ></ion-input>
       <ion-button (click)="sendMessage($event)">Send</ion-button>
     </ion-item>
   </ion-toolbar>

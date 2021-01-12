@@ -45,14 +45,12 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   private animateIn(keyboardHeight: number) {
-    const footerHtmlElement = <HTMLElement>(<any>this.footer).el;
+    const footerHtmlElement = (this.footer as any).el as HTMLElement;
     const toolbarHtmlElement = footerHtmlElement.querySelector('ion-toolbar');
     footerHtmlElement.style.setProperty(
       'transform',
       `translate3d(0, -${keyboardHeight}px, 0)`,
     );
-    footerHtmlElement.style.transition =
-      'transform 0.3s cubic-bezier(0.1, 0.76, 0.55, 0.9)';
     toolbarHtmlElement.style.paddingBottom = '0px';
   }
 
@@ -60,6 +58,6 @@ export class HomePage implements OnInit, OnDestroy {
     const footerHtmlElement = <HTMLElement>(<any>this.footer).el;
     const toolbarHtmlElement = footerHtmlElement.querySelector('ion-toolbar');
     footerHtmlElement.style.removeProperty('transform');
-    toolbarHtmlElement.style.paddingBottom = 'var(--ion-safe-area-bottom, 0)';
+    toolbarHtmlElement.style.removeProperty('padding-bottom');
   }
 }
