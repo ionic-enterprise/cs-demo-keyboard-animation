@@ -1,6 +1,4 @@
-import { Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
-import { KeyboardInfo, Plugins, KeyboardResize } from '@capacitor/core';
-import { Platform } from '@ionic/angular';
+import { Component, ViewChild } from '@angular/core';
 
 import { ChatMessage } from '@app/models';
 import { ChatService } from '@app/core';
@@ -10,30 +8,13 @@ import { ChatService } from '@app/core';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit, OnDestroy {
+export class HomePage {
   message: string;
   messages: Array<ChatMessage>;
 
   @ViewChild('messageInput') inp: HTMLIonInputElement;
-  @ViewChild('messageFooter') footer: HTMLIonFooterElement;
 
-  constructor(private chat: ChatService, private platform: Platform) {}
-
-  ngOnInit() {
-    if (this.platform.is('ios')) {
-      const { Keyboard } = Plugins;
-      Keyboard.setResizeMode({ mode: KeyboardResize.None });
-      Keyboard.addListener('keyboardWillShow', (info: KeyboardInfo) =>
-        this.animateIn(info.keyboardHeight),
-      );
-      Keyboard.addListener('keyboardWillHide', () => this.animateOut());
-    }
-  }
-
-  ngOnDestroy() {
-    const { Keyboard } = Plugins;
-    Keyboard.removeAllListeners();
-  }
+  constructor(private chat: ChatService) {}
 
   sendMessage(evt: Event) {
     this.inp.setFocus();
@@ -42,22 +23,5 @@ export class HomePage implements OnInit, OnDestroy {
       this.messages = this.chat.history();
       this.message = '';
     }
-  }
-
-  private animateIn(keyboardHeight: number) {
-    const footerHtmlElement = (this.footer as any).el as HTMLElement;
-    const toolbarHtmlElement = footerHtmlElement.querySelector('ion-toolbar');
-    footerHtmlElement.style.setProperty(
-      'transform',
-      `translate3d(0, -${keyboardHeight}px, 0)`,
-    );
-    toolbarHtmlElement.style.paddingBottom = '0px';
-  }
-
-  private animateOut() {
-    const footerHtmlElement = <HTMLElement>(<any>this.footer).el;
-    const toolbarHtmlElement = footerHtmlElement.querySelector('ion-toolbar');
-    footerHtmlElement.style.removeProperty('transform');
-    toolbarHtmlElement.style.removeProperty('padding-bottom');
   }
 }
