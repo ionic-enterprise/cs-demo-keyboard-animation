@@ -9,7 +9,7 @@ export class ChatService {
   private messages: Array<ChatMessage> = [];
   private responses: Array<string> = [
     'Fear is the path to the dark side. Fear leads to anger. Anger leads to hate. Hate leads to suffering.',
-    'You must unlearn what you have unlearned.',
+    'You must unlearn what you have learned.',
     'Try not. Do or do not. There is no try.',
     'We must wake.',
     'When you look at the dark side, careful you must be, for the dark side looks back.',
@@ -24,7 +24,7 @@ export class ChatService {
     'You fail because you don’t believe.',
     'If you end your training now, if you choose the quick and easy path as Vader did, you will become an agent of evil.',
     'Patience you must have.',
-    'The dark side clouds everything. Impossible to see the future the future is.',
+    'The dark side clouds everything. Impossible to see the future is.',
     'Clear your mind.',
     'Truly wonderful, the mind of a child is.',
     'In the end, cowards are those who follow the dark side.',
